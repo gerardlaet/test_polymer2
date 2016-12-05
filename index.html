@@ -1,0 +1,215 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>my-carousel demo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
+  <link rel="import" href="bower_components/polymer/polymer.html">
+
+  <link rel="import" href="my-carousel.html">
+  <link rel="import" href="my-button.html">
+  <link rel="import" href="my-rating.html">
+  <link rel="import" href="my-informations.html">
+  <link rel="import" href="my-comments.html">
+
+  <style>
+   html {
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: #eee;
+    }
+    my-carousel {
+      width: 100%;
+      contain: content;
+    }
+
+    my-carousel::after {
+      display: block;
+      content: '';
+      padding-top: 75%; /* 4:3 = height is 75% of width */
+    }
+
+    my-carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .block {
+      margin-left:5px;
+      margin-right:5px;
+      margin-top: 10px;
+      display: flex;
+      justify-content:space-around;
+      align-items: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .element {
+      margin-left:5px;
+      margin-right:5px;
+      margin-top: 10px;
+      display: block;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      background: #FFF;
+    }
+
+    .element h2{
+      padding: 5px;
+      background: #ff000a;
+      color: #FFF;
+      font-size: 20px;
+      margin:0;
+    }
+
+    .block my-button {
+      width: 100%;
+    }
+
+    #infos {
+      z-index: 200;
+      display: flex;
+      margin: 0 15px;
+      margin-top: -35px;
+
+      position: relative;
+      height: 65px;
+      background: #FFF;
+    }
+
+    .info {
+      display: flex;
+      padding: 5px;
+      justify-content:space-between;
+      align-items: center;
+    }
+
+    .info div:first-child{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .info div:last-child{
+      text-align: right;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+</style>
+
+</head>
+
+<body>
+  <my-carousel>
+    <img data-src="media/ski1.jpg">
+    <img data-src="media/ski2.jpg">
+    <img data-src="media/ski3.jpg">
+    <img data-src="media/ski4.jpg">
+    <img data-src="media/ski5.jpg">
+  </my-carousel>
+
+  <div class="block" id="infos">
+      <div>Salomon Skis</div>
+      <div><my-rating nb="5"></my-rating></div>
+      <div>290$</div>
+  </div>
+
+  <div class="block" id="listActions">
+    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
+    <my-button class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'comment');"><i class="material-icons">grade</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'promo');"><i class="material-icons">money_off</i></my-button>
+  </div>
+  
+  <div class="element" id="info">
+    <h2>Informations</h2>
+    <my-informations ></my-informations>
+  </div>
+
+  <div class="element" id="medias" style="padding-bottom:10px;">
+  <h2>Medias</h2>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">Look at the screen</div>
+  <!-- <video controls style="max-width:100%;">
+      <source src="media/Titleist.mp4"></source>
+  </video> -->
+  </div>
+
+
+  <div class="element" id="comment">
+  <h2>Comments</h2>
+  <my-comments ></my-comments>
+  </div>
+
+  <div class="element" id="promo">
+  <h2>Promo <div  style="float:right;">-30%</div></h2>
+  <div style="display: flex; align-items: center; justify-content: center; margin-top:5px;">
+    <img src="media/promo.jpg" style="max-width:100%; max-height:150px;"></img>
+  </div>
+  </div>
+
+  <script>
+  window.onload = function() {
+      document.getElementById('firstAction').click();
+    };
+
+    function selectElement(e, target) {
+
+      elements = document.getElementsByClassName("my-button");
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].setAttribute('selected', "");
+      }
+
+      e.setAttribute('selected', 'active');
+
+      elements = document.getElementsByClassName("element");
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].className = 'element hidden';
+      }
+      document.getElementById(target).className = 'element';
+    }
+
+    function callPlayer() {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+             if (xmlhttp.status == 200) {
+                 console.log("ok");
+             }
+             else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
+             }
+             else {
+                 alert('something else other than 200 was returned');
+             }
+          }
+      };
+
+      xmlhttp.open("POST", "/show/123", true);
+      xmlhttp.send();
+    }
+
+  const carousel = document.querySelector('my-carousel');
+  //setInterval(_ => carousel.next(), 3000);
+  window.carrousselPlay = setInterval(_ => carousel.next(), 3000);
+</script>
+</body>
+</html>

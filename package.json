@@ -1,0 +1,14 @@
+{
+  "name": "player_web",
+  "version": "0.0.1",
+  "description": "player web",
+  "main": "registration.html",
+  "scripts": {
+    "start": "browser-sync start --files \"*, elements/* \" --server --port 8080"
+  },
+  "author": "edouard rabany",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

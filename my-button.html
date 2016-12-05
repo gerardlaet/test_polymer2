@@ -1,0 +1,106 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="my-mixin.html">
+
+<dom-module id="my-button">
+  <template>
+
+    <!-- Styles MUST be inside template -->
+    <style>
+
+    button {
+      width:100%;
+      background: #FFF;
+      height:75px;
+      width: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 45px;
+      text-align: center;
+      z-index: 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border:none;
+
+    }
+
+    button:hover, button.active{
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      z-index: 10;
+      background: #ff000a;
+      color:#FFF;
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 35px;  /* Preferred icon size */
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      /* Support for all WebKit browsers. */
+      -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+      text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+      -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+      font-feature-settings: 'liga';
+      width:35px;
+    }
+    </style>
+
+    <button id="the-button" class$="{{selected}}"><slot></slot></button>
+
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element with MyMixin
+    class MyButton extends MyMixin(Polymer.Element) {
+
+      static get is() { return 'my-button' }
+
+      static get observedAttributes() {
+          return ['selected'];
+      }
+
+      static get config() {
+          return {
+              properties: {
+                  selected: String
+              }
+          };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+      }
+
+      _selectedChanged(selected, oldSelected) {
+        //super._selectedChanged(selected, oldSelected);
+      }
+
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(MyButton.is, MyButton);
+
+  </script>
+</dom-module>
