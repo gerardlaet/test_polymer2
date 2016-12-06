@@ -1,0 +1,206 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>my-carousel demo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
+  <link rel="import" href="bower_components/polymer/polymer.html">
+
+  <link rel="import" href="my-carousel.html">
+  <link rel="import" href="my-button.html">
+  <link rel="import" href="my-rating.html">
+  <link rel="import" href="my-informations.html">
+  <link rel="import" href="my-comments.html">
+
+  <style>
+   html {
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: #eee;
+    }
+    my-carousel {
+      width: 100%;
+      contain: content;
+    }
+
+    my-carousel::after {
+      display: block;
+      content: '';
+      padding-top: 75%; /* 4:3 = height is 75% of width */
+    }
+
+    my-carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .block {
+      margin-left:5px;
+      margin-right:5px;
+      margin-top: 10px;
+      display: flex;
+      justify-content:space-around;
+      align-items: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .element {
+      margin-left:5px;
+      margin-right:5px;
+      margin-top: 10px;
+      display: block;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      background: #FFF;
+    }
+
+    .element h2{
+      padding: 5px;
+      background: #ff000a;
+      color: #FFF;
+      font-size: 20px;
+      margin:0;
+    }
+
+    .block my-button {
+      width: 100%;
+    }
+
+    #infos {
+      z-index: 200;
+      display: flex;
+      margin: 0 15px;
+      margin-top: -35px;
+
+      position: relative;
+      height: 65px;
+      background: #FFF;
+    }
+
+    .info {
+      display: flex;
+      padding: 5px;
+      justify-content:space-between;
+      align-items: center;
+    }
+
+    .info div:first-child{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .info div:last-child{
+      text-align: right;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+</style>
+</head>
+
+<body>
+  <div class="block" id="listActions">
+    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'comment');"><i class="material-icons">grade</i></my-button>
+  </div>
+  
+  <div class="element" id="info">
+    <h2>Informations</h2>
+    <my-informations informations='[{
+                                    "title": "Product Dimensions",
+                                    "desc": "156 x 163 x 170 cm"
+                                }, {
+                                    "title": "Guarantee",
+                                    "desc": "2 Years"
+                                }, {
+                                    "title": "Sidecut",
+                                    "desc": "126/80/109, 13.6 m in 170 cm"
+                                }, {
+                                    "title": "Programme",
+                                    "desc": "70% On-piste"
+                                }, {
+                                    "title": "Construction",
+                                    "desc": "2 layers of titanal"
+                                }]'></my-informations>
+  </div>
+
+  <div class="element" id="medias" style="padding-bottom:10px;">
+    <h2>Medias</h2>
+    <div style="margin:15px; font-size:25px; text-align:center; display:block;">
+      <my-carousel>
+        <img data-src="media/ski1.png">
+        <img data-src="media/ski2.png">
+        <img data-src="media/ski3.png">
+      </my-carousel>
+
+    </div>
+  </div>
+
+  <div class="element" id="comment">
+  <h2>Comments</h2>
+  <my-comments comments='[{
+                                    "title": "Love them",
+                                    "author" : "By  Kathy M. Honea   on April 26, 2016",
+                                    "grade": "5",
+                                    "desc": "Great all around skis! "
+                                }, {
+                                    "title": "BEST SKIS YOU CAN BUY!",
+                                    "author" : "By  Derek   on March 4, 2016",
+                                    "grade": "5",
+                                    "desc": "These skis are one of the best skis I ve ever had in my life time. I was skiing in a pair of volki all mountain skis then I switched to these one and now I m never going back. These skis are great for my second pair of skis I ve owned and I recommend getting the Salomon Sth2 WTR 13 Bindings at 100mm or 115mm bindings or Warden MNC 13. BUY THESE SKIS!"
+                                }, {
+                                    "title": "4 Stars",
+                                    "author" : "By  Bryce    on November 6, 2015",
+                                    "grade": "4",
+                                    "desc": "Great skis"
+                                }]' ></my-comments>
+  </div>
+
+  <script>
+    window.onload = function() {
+      document.getElementById('firstAction').click();
+    };
+
+    function selectElement(e, target) {
+
+      elements = document.getElementsByClassName("my-button");
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].setAttribute('selected', "");
+      }
+
+      e.setAttribute('selected', 'active');
+
+      elements = document.getElementsByClassName("element");
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].className = 'element hidden';
+      }
+      document.getElementById(target).className = 'element';
+    }
+
+    
+
+  const carousel = document.querySelector('my-carousel');
+  //setInterval(_ => carousel.next(), 3000);
+  //window.carrousselPlay = setInterval(_ => carousel.next(), 3000);
+</script>
+</body>
+</html>
