@@ -51,14 +51,25 @@ app.post('/web/:id/:evt', function (req, res, next) {
 
 app.use('/', express.static(__dirname));
 
-app.ws('/', function(ws, req) {
+var clients = [];
 
+app.ws('/', function(ws, req) {
+  clients.push(ws);
   ws.on('message', function(msg) {
+    broadcast(msg);
     console.log("Receive message", msg);
   });
 
   console.log('someoneConnected');
   ws.send("You are connected");
+
+  function broadcast(msg) {
+    console.log(clients);
+    clients.forEach(function(client) {
+        client.send(msg);
+      });
+  }
+
 });
 
 app.listen(port, function() { console.log('listening') });

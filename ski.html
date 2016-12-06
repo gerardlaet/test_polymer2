@@ -26,6 +26,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="my-rating.html">
   <link rel="import" href="my-informations.html">
   <link rel="import" href="my-comments.html">
+  <link rel="import" href="my-interactivity.html">
+
+  <script>
+  window.socket = new WebSocket("ws://localhost:3000");
+  socket.onopen = function (event) {
+    socket.send("Im here");
+  };
+  </script>
 
   <style>
    html {
@@ -134,9 +142,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <my-button class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
     <my-button id="firstAction" class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
     <my-button class="my-button" onclick="stopPlayer();selectElement(this,'stop');"><i class="material-icons">stop</i></my-button>
-    <my-button class="my-button" onclick="callWeb();selectElement(this,'web');"><i class="material-icons">add</i></my-button>
+    <my-button class="my-button" onclick="callWeb();selectElement(this,'interaction');"><i class="material-icons">add</i></my-button>
   </div>
-  
+
   <div class="element" id="info">
     <h2>Informations</h2>
     <my-informations informations='[{
@@ -164,6 +172,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <source src="media/Titleist.mp4"></source>
   </video> -->
   </div>
+
+
+    <div class="element" id="interaction" style="padding-bottom:10px;">
+    <h2>interactivity</h2>
+    <my-interactivity ></my-interactivity>
+    </div>
 
 
   <div class="element" id="stop">

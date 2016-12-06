@@ -29,7 +29,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
   window.socket = new WebSocket("ws://localhost:3000");
-
   socket.onopen = function (event) {
     socket.send("Im here");
   };
@@ -158,6 +157,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- <video controls style="max-width:100%;">
       <source src="media/Titleist.mp4"></source>
   </video> -->
+  </div>
+
+  <div class="element" id="interaction" style="padding-bottom:10px;">
+  <h2>interactivity</h2>
+  <my-interactivity ></my-interactivity>
   </div>
 
 
