@@ -1,0 +1,124 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="my-mixin.html">
+
+<dom-module id="my-interactivity">
+    <template>
+    <style>
+    :host{
+      max-width: 120px;
+          display: block;
+          margin: auto;
+          margin-top: 10px;
+    }
+
+    button {
+      top: calc(50% - 20px);
+      padding: 0;
+      line-height: 40px;
+      border: none;
+      background: none;
+      color: #333;
+      font-size: 50px;
+      font-weight: bold;
+      opacity: 1;
+      outline:none;
+      cursor: pointer;
+    }
+    button:hover {
+
+      color: #ff000a;
+    }
+
+    </style>
+
+    <button id="northBtn" on-click="north" style="width:100%; transform: rotate(90deg);">❮</button>
+    <button id="westBtn" on-click="west" style="">❮</button>
+    <button id="eastBtn" on-click="east" style="float:right;">❯</button>
+    <button id="southBtn" on-click="south"  style="width:100%; transform: rotate(90deg);">❯</button>
+
+    </template>
+    <script>
+        // Extend Polymer.Element with MyMixin
+        class MyInteractivity extends Polymer.Element {
+
+            static get is() {
+                return 'my-interactivity'
+            }
+            static get observedAttributes() {
+                return ['interactivity'];
+            }
+
+            static get config() {
+                return {
+                    properties: {
+                        comments: {
+                            type: Object,
+                            value: function() {
+                                return [{
+                                    title: "title",
+                                    author : '',
+                                    grade: 5,
+                                    desc: ""
+                                }];
+                            }
+                        }
+                    }
+                };
+            }
+
+            north() {
+              console.log('north');
+              if(socket) {
+                socket.send("north");
+              }
+            }
+
+            west() {
+              console.log('west');
+              if(socket) {
+                socket.send("west");
+              }
+            }
+
+            east() {
+              console.log('east');
+              if(socket) {
+                socket.send("east");
+              }
+            }
+
+            south() {
+              console.log('south');
+              if(socket) {
+                socket.send("south");
+              }
+            }
+
+
+            attributeChangedCallback(attrName, oldValue, newValue) {
+                this[attrName] = newValue;
+                if(attrName == "comments") {
+                    this.comments=JSON.parse(newValue);
+                }
+            }
+
+            set comments(value) {
+                console.log(value);
+            }
+        }
+
+        // Register custom element definition using standard platform API
+        customElements.define(MyInteractivity.is, MyInteractivity);
+    </script>
+</dom-module>

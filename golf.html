@@ -26,7 +26,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="my-rating.html">
   <link rel="import" href="my-informations.html">
   <link rel="import" href="my-comments.html">
+  <link rel="import" href="my-interactivity.html">
 
+  <script>
+  window.socket = new WebSocket("ws://localhost:3000");
+  socket.onopen = function (event) {
+    socket.send("Im here");
+  };
+  </script>
 
   <style>
    html {
@@ -152,6 +159,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                     "desc": "6-way dividers"
                                 }]'></my-informations>
   </div>
+
+
+    <div class="element" id="interaction" style="padding-bottom:10px;">
+    <h2>interactivity</h2>
+    <my-interactivity ></my-interactivity>
+    </div>
+
 
   <div class="element" id="medias" style="padding-bottom:10px;">
   <h2>Medias</h2>
