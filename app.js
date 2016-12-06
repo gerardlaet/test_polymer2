@@ -16,7 +16,7 @@ app.post('/show/:id/:evt', function (req, res, next) {
           return console.log(err);
       }
   });
-  //res.send('Hello World!');
+  res.send('Hello World!');
 })
 app.post('/stop/:id/:evt', function (req, res, next) {
   console.log('stop '+req.params.id);
@@ -26,7 +26,7 @@ app.post('/stop/:id/:evt', function (req, res, next) {
           return console.log(err);
       }
   });
-  //res.send('Hello World!');
+  res.send('Hello World!');
 })
 app.post('/web/:id/:evt', function (req, res, next) {
   console.log('web '+req.params.id);
@@ -37,7 +37,7 @@ app.post('/web/:id/:evt', function (req, res, next) {
           return console.log(err);
       }
   });
-  //res.send('Hello World!');
+  res.send('Hello World!');
 })
 /*
 app.use('/*.html', function (req, res, next) {
