@@ -33,10 +33,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     body {
       background: #eee;
+      
+    }
+    .global {
+      width:942px;
+      max-height:530px;
     }
     my-carousel {
       width: 100%;
       contain: content;
+      height:350px;
     }
 
     my-carousel::after {
@@ -47,8 +53,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     my-carousel img {
       /*position: absolute;*/
-      width: 100%;
-      height: 100%;
+      max-height:350px;
+      /*width: 100%;
+      height: 100%;*/
     }
 
     .block {
@@ -117,10 +124,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 
 <body>
+  <div class="global">
   <div class="block" id="listActions">
-    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'comment');"><i class="material-icons">grade</i></my-button>
+    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" >Details</my-button>
+    <my-button class="my-button" onclick="selectElement(this,'medias');">Media</my-button>
+    <my-button class="my-button" onclick="selectElement(this,'comment');">Reviews</my-button>
   </div>
   
   <div class="element" id="info">
@@ -174,7 +182,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                     "desc": "Great skis"
                                 }]' ></my-comments>
   </div>
-
+  </div>
   <script>
     window.onload = function() {
       document.getElementById('firstAction').click();
