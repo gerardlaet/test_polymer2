@@ -21,11 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
   <link rel="import" href="bower_components/polymer/polymer.html">
 
-  <link rel="import" href="my-carousel.html">
+<link rel="import" href="my-informations.html">
   <link rel="import" href="my-button.html">
-  <link rel="import" href="my-rating.html">
-  <link rel="import" href="my-informations.html">
-  <link rel="import" href="my-comments.html">
 
   <style>
    html {
@@ -36,23 +33,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
     }
     .global {
-      width:942px;
+      width:926px;
       max-height:530px;
     }
-    my-carousel {
+    #medias {
       width: 100%;
       contain: content;
       height:350px;
     }
 
-    my-carousel::after {
+    #medias::after {
       display: block;
       content: '';
       padding-top: 75%; /* 4:3 = height is 75% of width */
     }
 
-    my-carousel img {
-      /*position: absolute;*/
+    #medias img {
+      position: absolute;
       max-height:350px;
       /*width: 100%;
       height: 100%;*/
@@ -120,6 +117,83 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       display: none;
     }
 
+
+.elemComment {
+      margin:0px 5px;
+      margin-top:15px;
+      position: relative;
+    }
+
+    .elemComment .head {
+      display: flex;
+      justify-content: space-between;
+      height:30px;
+      align-items: center;
+    }
+.com_desc {
+      color:#555;
+      text-align:left;
+      font-size:16px;
+    }
+
+    .com_desc.small {
+      max-height: 35px;
+      overflow: hidden;
+      padding-bottom:15px;
+    }
+
+    .com_desc.small:after {
+      content:"...";
+      display: block;
+      position: absolute;
+      bottom:-15px;
+    }
+
+    .com_title {
+      font-size:18px;
+    }
+
+    .com_author {
+      margin-bottom: 5px;
+      color:#a2a2e2;
+      text-align:left;
+      font-size:16px;
+    }
+
+    
+    .material-icons {
+      color:#a2a2a2;
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 15px;  /* Preferred icon size */
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      /* Support for all WebKit browsers. */
+      -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+      text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+      -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+      font-feature-settings: 'liga';
+      width:15px;
+    }
+
+    .material-icons.active {
+      color:red;
+    }
+.com_grade{
+      justify-content: center;
+      display: flex;
+    }
+ 
+
 </style>
 </head>
 
@@ -133,50 +207,79 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   
   <div class="element" id="info">
     <h2>Informations</h2>
-    <my-informations informations='[{
-                                    "title": "Product Dimensions",
-                                    "desc": "16 x 12 x 1.1 inches"
-                                }, {
-                                    "title": "Guarantee",
-                                    "desc": "2 Years"
-                                }, {
-                                    "title": "Compartments",
-                                    "desc": "6-way dividers"
-                                }]'></my-informations>
+    <div class="elem">
+            <div class="info">
+                <div>Product Dimensions</div><div>16 x 12 x 1.1 inches</div>
+            </div>
+        </div>
+         <div class="elem">
+            <div class="info">
+                <div>Guarantee</div><div>2 Years</div>
+            </div>
+        </div>
+         <div class="elem">
+            <div class="info">
+                <div>Compartments</div><div>6-way dividers</div>
+            </div>
+        </div>
   </div>
 
   <div class="element" id="medias" style="padding-bottom:10px;">
     <h2>Medias</h2>
-    <div style="margin:15px; font-size:25px; text-align:center; display:block;">
-      <my-carousel>
-        <img data-src="media/golf1.png">
-        <img data-src="media/golf2.png">
-        <img data-src="media/golf3.png">
-        <img data-src="media/golf4.png">
-      </my-carousel>
-
-    </div>
+    <img src="media/golf1.png" hidden>
+    <img src="media/golf2.png" hidden>
+    <img src="media/golf3.png" hidden>
+    <img src="media/golf4.png" hidden>
   </div>
 
   <div class="element" id="comment">
   <h2>Comments</h2>
-  <my-comments comments='[{
-                                    "title": "Highly Recommended",
-                                    "author" : "By  Max   on April 3, 2016",
-                                    "grade": "5",
-                                    "desc": "This beats all of the competitor bags I looked at prior to purchasing. It is on the more expensive side, about $50 more than I wanted to spend. As soon as I unpacked it I was blown away by how light it is. It does come with a rain cover. Waterproof polar fleece lined pocket for wallet / other goods."
-                                }, {
-                                    "title": "Just as expected",
-                                    "author" : "By  Bryce and Rachel   on August 23, 2016",
-                                    "grade": "5",
-                                    "desc": "This bag is on the expensive side in terms of stand bags. With that being said, with titleist you know exactly the quality you are getting. The straps are as comfortable as straps get and have ample padding. As you spend more on a bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed."
-                                }, {
-                                    "title": "good sturdy bag",
-                                    "author" : "By  Rebecca Oates   on June 23, 2016",
-                                    "grade": "4",
-                                    "desc": "good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had."
-                                }]'></my-comments>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">
+      <div class="elemComment">
+          <div class="head">
+            <div class="com_title">Highly Recommended</div>
+            <div class="com_grade">
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            </div>
+          </div>
+          <div class="com_author">By  Max   on April 3, 2016</div>
+          <div class="com_desc">This beats all of the competitor bags I looked at prior to purchasing. It is on the more expensive side, about $50 more than I wanted to spend. As soon as I unpacked it I was blown away by how light it is. It does come with a rain cover. Waterproof polar fleece lined pocket for wallet / other goods.</div>
+        </div>
+        <div class="elemComment">
+          <div class="head">
+            <div class="com_title">Just as expected</div>
+            <div class="com_grade">
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            </div>
+          </div>
+          <div class="com_author">By  Bryce and Rachel   on August 23, 2016</div>
+          <div class="com_desc">This bag is on the expensive side in terms of stand bags. With that being said, with titleist you know exactly the quality you are getting. The straps are as comfortable as straps get and have ample padding. As you spend more on a bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed.</div>
+        </div>
+        <div class="elemComment">
+          <div class="head">
+            <div class="com_title">good sturdy bag</div>
+            <div class="com_grade">
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            <i class="material-icons active">grade</i>
+            </div>
+          </div>
+          <div class="com_author">By  Rebecca Oates   on June 23, 2016</div>
+          <div class="com_desc">good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had.</div>
+        </div>
+
+    </div>
   </div>
+
   </div>
   <script>
     window.onload = function() {
