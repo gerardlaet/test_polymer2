@@ -10,303 +10,342 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-  <title>my-carousel demo</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>my-carousel demo</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
-  <link rel="import" href="bower_components/polymer/polymer.html">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
+    <link rel="import" href="bower_components/polymer/polymer.html">
 
-<link rel="import" href="my-informations.html">
-  <link rel="import" href="my-button.html">
+    <link rel="import" href="my-informations.html">
+    <link rel="import" href="my-button.html">
+    <script>
+        window.socket = new WebSocket("ws://localhost:3000");
+        socket.onopen = function(event) {
+            socket.send("interaction_golf");
+        };
+        socket.onmessage = function(evt) {
+            var received_msg = evt.data;
+            console.log("Message is received", received_msg);
+            if (received_msg) {
 
-  <style>
-   html {
-      font-family: 'Roboto', sans-serif;
-    }
-    body {
-      background: #eee;
-      
-    }
-    .global {
-      width:926px;
-      max-height:530px;
-    }
-    #medias {
-      width: 100%;
-      contain: content;
-      height:350px;
-    }
+                switch (received_msg) {
+                    case "north":
+                        console.log('go north');
+                        ;
+                        console.log(document.getElementsByClassName("active").nextSibling);
+                        break;
+                    case "south":
 
-    #medias::after {
-      display: block;
-      content: '';
-      padding-top: 75%; /* 4:3 = height is 75% of width */
-    }
+                        break;
+                    case "east":
 
-    #medias img {
-      position: absolute;
-      max-height:350px;
-      /*width: 100%;
+                        break;
+                    case "west":
+
+                        break;
+                    default:
+                }
+
+            }
+        };
+    </script>
+    <style>
+        html {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .global {
+            width: 926px;
+            max-height: 530px;
+        }
+
+        #medias {
+            width: 100%;
+            contain: content;
+            height: 350px;
+        }
+
+        #medias::after {
+            display: block;
+            content: '';
+            padding-top: 75%;
+            /* 4:3 = height is 75% of width */
+        }
+
+        #medias img {
+            position: absolute;
+            max-height: 350px;
+            /*width: 100%;
       height: 100%;*/
-    }
+        }
 
-    .block {
-      margin-left:5px;
-      margin-right:5px;
-      margin-top: 10px;
-      display: flex;
-      justify-content:space-around;
-      align-items: center;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
+        .block {
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
 
-    .element {
-      margin-left:5px;
-      margin-right:5px;
-      margin-top: 10px;
-      display: block;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-      background: #FFF;
-    }
+        .element {
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: 10px;
+            display: block;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            background: #FFF;
+        }
 
-    .element h2{
-      padding: 5px;
-      background: #ff000a;
-      color: #FFF;
-      font-size: 20px;
-      margin:0;
-    }
+        .element h2 {
+            padding: 5px;
+            background: #ff000a;
+            color: #FFF;
+            font-size: 20px;
+            margin: 0;
+        }
 
-    .block my-button {
-      width: 100%;
-    }
+        .block my-button {
+            width: 100%;
+        }
 
-    #infos {
-      z-index: 200;
-      display: flex;
-      margin: 0 15px;
-      margin-top: -35px;
+        #infos {
+            z-index: 200;
+            display: flex;
+            margin: 0 15px;
+            margin-top: -35px;
+            position: relative;
+            height: 65px;
+            background: #FFF;
+        }
 
-      position: relative;
-      height: 65px;
-      background: #FFF;
-    }
+        .info {
+            display: flex;
+            padding: 5px;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .info {
-      display: flex;
-      padding: 5px;
-      justify-content:space-between;
-      align-items: center;
-    }
+        .info div:first-child {
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-    .info div:first-child{
-      font-weight: bold;
-      font-size: 14px;
-    }
+        .info div:last-child {
+            text-align: right;
+        }
 
-    .info div:last-child{
-      text-align: right;
-    }
+        .hidden {
+            display: none;
+        }
 
-    .hidden {
-      display: none;
-    }
+        .elemComment {
+            margin: 0px 5px;
+            margin-top: 15px;
+            position: relative;
+        }
 
+        .elemComment .head {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            align-items: center;
+        }
 
-.elemComment {
-      margin:0px 5px;
-      margin-top:15px;
-      position: relative;
-    }
+        .com_desc {
+            color: #555;
+            text-align: left;
+            font-size: 16px;
+        }
 
-    .elemComment .head {
-      display: flex;
-      justify-content: space-between;
-      height:30px;
-      align-items: center;
-    }
-.com_desc {
-      color:#555;
-      text-align:left;
-      font-size:16px;
-    }
+        .com_desc.small {
+            max-height: 35px;
+            overflow: hidden;
+            padding-bottom: 15px;
+        }
 
-    .com_desc.small {
-      max-height: 35px;
-      overflow: hidden;
-      padding-bottom:15px;
-    }
+        .com_desc.small:after {
+            content: "...";
+            display: block;
+            position: absolute;
+            bottom: -15px;
+        }
 
-    .com_desc.small:after {
-      content:"...";
-      display: block;
-      position: absolute;
-      bottom:-15px;
-    }
+        .com_title {
+            font-size: 18px;
+        }
 
-    .com_title {
-      font-size:18px;
-    }
+        .com_author {
+            margin-bottom: 5px;
+            color: #a2a2e2;
+            text-align: left;
+            font-size: 16px;
+        }
 
-    .com_author {
-      margin-bottom: 5px;
-      color:#a2a2e2;
-      text-align:left;
-      font-size:16px;
-    }
+        .material-icons {
+            color: #a2a2a2;
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 15px;
+            /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+            width: 15px;
+        }
 
-    
-    .material-icons {
-      color:#a2a2a2;
-      font-family: 'Material Icons';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 15px;  /* Preferred icon size */
-      display: inline-block;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
-      /* Support for IE. */
-      font-feature-settings: 'liga';
-      width:15px;
-    }
+        .material-icons.active {
+            color: red;
+        }
 
-    .material-icons.active {
-      color:red;
-    }
-.com_grade{
-      justify-content: center;
-      display: flex;
-    }
- 
-
-</style>
+        .com_grade {
+            justify-content: center;
+            display: flex;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="global">
-  <div class="block" id="listActions">
-    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" >Details</my-button>
-    <my-button class="my-button" onclick="selectElement(this,'medias');">Media</my-button>
-    <my-button class="my-button" onclick="selectElement(this,'comment');">Reviews</my-button>
-  </div>
-  
-  <div class="element" id="info">
-    <h2>Informations</h2>
-    <div class="elem">
-            <div class="info">
-                <div>Product Dimensions</div><div>16 x 12 x 1.1 inches</div>
-            </div>
+    <div class="global">
+        <div class="block" id="listActions">
+            <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');">Details</my-button>
+            <my-button class="my-button" onclick="selectElement(this,'medias');">Media</my-button>
+            <my-button class="my-button" onclick="selectElement(this,'comment');">Reviews</my-button>
         </div>
-         <div class="elem">
-            <div class="info">
-                <div>Guarantee</div><div>2 Years</div>
-            </div>
-        </div>
-         <div class="elem">
-            <div class="info">
-                <div>Compartments</div><div>6-way dividers</div>
-            </div>
-        </div>
-  </div>
 
-  <div class="element" id="medias" style="padding-bottom:10px;">
-    <h2>Medias</h2>
-    <img src="media/golf1.png" hidden>
-    <img src="media/golf2.png" hidden>
-    <img src="media/golf3.png" hidden>
-    <img src="media/golf4.png" hidden>
-  </div>
+        <div class="element" id="info">
+            <h2>Informations</h2>
+            <div class="elem">
+                <div class="info">
+                    <div>Product Dimensions</div>
+                    <div>16 x 12 x 1.1 inches</div>
+                </div>
+            </div>
+            <div class="elem">
+                <div class="info">
+                    <div>Guarantee</div>
+                    <div>2 Years</div>
+                </div>
+            </div>
+            <div class="elem">
+                <div class="info">
+                    <div>Compartments</div>
+                    <div>6-way dividers</div>
+                </div>
+            </div>
+        </div>
 
-  <div class="element" id="comment">
-  <h2>Comments</h2>
-  <div style="margin:15px; font-size:25px; text-align:center; display:block;">
-      <div class="elemComment">
-          <div class="head">
-            <div class="com_title">Highly Recommended</div>
-            <div class="com_grade">
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            </div>
-          </div>
-          <div class="com_author">By  Max   on April 3, 2016</div>
-          <div class="com_desc">This beats all of the competitor bags I looked at prior to purchasing. It is on the more expensive side, about $50 more than I wanted to spend. As soon as I unpacked it I was blown away by how light it is. It does come with a rain cover. Waterproof polar fleece lined pocket for wallet / other goods.</div>
+        <div class="element" id="medias" style="padding-bottom:10px;">
+            <h2>Medias</h2>
+            <img src="media/golf1.png" hidden>
+            <img src="media/golf2.png" hidden>
+            <img src="media/golf3.png" hidden>
+            <img src="media/golf4.png" hidden>
         </div>
-        <div class="elemComment">
-          <div class="head">
-            <div class="com_title">Just as expected</div>
-            <div class="com_grade">
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
+
+        <div class="element" id="comment">
+            <h2>Comments</h2>
+            <div style="margin:15px; font-size:25px; text-align:center; display:block;">
+                <div class="elemComment">
+                    <div class="head">
+                        <div class="com_title">Highly Recommended</div>
+                        <div class="com_grade">
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                        </div>
+                    </div>
+                    <div class="com_author">By Max on April 3, 2016</div>
+                    <div class="com_desc">This beats all of the competitor bags I looked at prior to purchasing. It is on the more expensive side, about $50 more than I wanted to spend. As soon as I unpacked it I was blown away by how light it is. It does come with a rain
+                        cover. Waterproof polar fleece lined pocket for wallet / other goods.</div>
+                </div>
+                <div class="elemComment">
+                    <div class="head">
+                        <div class="com_title">Just as expected</div>
+                        <div class="com_grade">
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                        </div>
+                    </div>
+                    <div class="com_author">By Bryce and Rachel on August 23, 2016</div>
+                    <div class="com_desc">This bag is on the expensive side in terms of stand bags. With that being said, with titleist you know exactly the quality you are getting. The straps are as comfortable as straps get and have ample padding. As you spend more on a
+                        bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive
+                        and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed.</div>
+                </div>
+                <div class="elemComment">
+                    <div class="head">
+                        <div class="com_title">good sturdy bag</div>
+                        <div class="com_grade">
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                            <i class="material-icons active">grade</i>
+                        </div>
+                    </div>
+                    <div class="com_author">By Rebecca Oates on June 23, 2016</div>
+                    <div class="com_desc">good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had.</div>
+                </div>
+
             </div>
-          </div>
-          <div class="com_author">By  Bryce and Rachel   on August 23, 2016</div>
-          <div class="com_desc">This bag is on the expensive side in terms of stand bags. With that being said, with titleist you know exactly the quality you are getting. The straps are as comfortable as straps get and have ample padding. As you spend more on a bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed.</div>
-        </div>
-        <div class="elemComment">
-          <div class="head">
-            <div class="com_title">good sturdy bag</div>
-            <div class="com_grade">
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            <i class="material-icons active">grade</i>
-            </div>
-          </div>
-          <div class="com_author">By  Rebecca Oates   on June 23, 2016</div>
-          <div class="com_desc">good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had.</div>
         </div>
 
     </div>
-  </div>
+    <script>
+        window.onload = function() {
+            document.getElementById('firstAction').click();
+        };
 
-  </div>
-  <script>
-    window.onload = function() {
-      document.getElementById('firstAction').click();
-    };
+        function selectElement(e, target) {
 
-    function selectElement(e, target) {
+            elements = document.getElementsByClassName("my-button");
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].setAttribute('selected', "");
+            }
 
-      elements = document.getElementsByClassName("my-button");
-      for (var i = 0; i < elements.length; i++) {
-          elements[i].setAttribute('selected', "");
-      }
+            e.setAttribute('selected', 'active');
 
-      e.setAttribute('selected', 'active');
+            elements = document.getElementsByClassName("element");
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].className = 'element hidden';
+            }
+            document.getElementById(target).className = 'element';
+        }
 
-      elements = document.getElementsByClassName("element");
-      for (var i = 0; i < elements.length; i++) {
-          elements[i].className = 'element hidden';
-      }
-      document.getElementById(target).className = 'element';
-    }
 
-    
 
-  const carousel = document.querySelector('my-carousel');
-  //setInterval(_ => carousel.next(), 3000);
-  //window.carrousselPlay = setInterval(_ => carousel.next(), 3000);
-</script>
+        const carousel = document.querySelector('my-carousel');
+        //setInterval(_ => carousel.next(), 3000);
+        //window.carrousselPlay = setInterval(_ => carousel.next(), 3000);
+    </script>
 </body>
+
 </html>

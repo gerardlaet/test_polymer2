@@ -52,19 +52,24 @@ app.post('/web/:id/:evt', function (req, res, next) {
 app.use('/', express.static(__dirname));
 
 var clients = [];
-
+var connectionIDCounter = 0;
 app.ws('/', function(ws, req) {
-  clients.push(ws);
+  ws.id = connectionIDCounter++;
+  console.log('someoneConnected', ws.id);
+  clients[ws.id] = ws;
   ws.on('message', function(msg) {
     broadcast(msg);
     console.log("Receive message", msg);
   });
 
-  console.log('someoneConnected');
   ws.send("You are connected");
 
+  ws.on('close', function() {
+    console.log("Disconnected", ws.id);
+    delete clients[ws.id]
+  });
+
   function broadcast(msg) {
-    console.log(clients);
     clients.forEach(function(client) {
         client.send(msg);
       });
