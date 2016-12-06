@@ -9,6 +9,7 @@
   "author": "edouard rabany",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "express-ws": "^2.0.0"
   }
 }

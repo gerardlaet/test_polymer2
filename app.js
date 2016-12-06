@@ -1,7 +1,10 @@
 var express = require('express');
 var app = express();
-
+var http = require('http').Server(app);
 var fs = require('fs');
+var expressWs = require('express-ws')(app);
+
+const port = 3000;
 
 app.use(express.static('public'));
 app.use(express.static('files'));
@@ -9,7 +12,7 @@ app.use(express.static('files'));
 app.post('/show/:id/:evt', function (req, res, next) {
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log('start '+req.params.id+' appel from '+ip);
-  
+
   console.log("P:/evt/"+req.params.evt+".evt");
   fs.writeFile("P:/evt/"+req.params.evt+".evt", req.params.id, function(err) {
       if(err) {
@@ -18,6 +21,7 @@ app.post('/show/:id/:evt', function (req, res, next) {
   });
   res.send('Hello World!');
 })
+
 app.post('/stop/:id/:evt', function (req, res, next) {
   console.log('stop '+req.params.id);
   console.log("P:/evt/"+req.params.evt+".evt");
@@ -30,7 +34,7 @@ app.post('/stop/:id/:evt', function (req, res, next) {
 })
 app.post('/web/:id/:evt', function (req, res, next) {
   console.log('web '+req.params.id);
-  
+
   console.log("P:/evt/"+req.params.evt+".evt");
   fs.writeFile("P:/evt/"+req.params.evt+".evt", req.params.id, function(err) {
       if(err) {
@@ -39,11 +43,22 @@ app.post('/web/:id/:evt', function (req, res, next) {
   });
   res.send('Hello World!');
 })
-/*
-app.use('/*.html', function (req, res, next) {
-  console.log('Time:', Date.now())
-  next()
-})
-*/
+
+// app.use('/*.html', function (req, res, next) {
+//   console.log('Time:', Date.now())
+//   next()
+// })
+
 app.use('/', express.static(__dirname));
-app.listen(3000, function() { console.log('listening') });
+
+app.ws('/', function(ws, req) {
+
+  ws.on('message', function(msg) {
+    console.log("Receive message", msg);
+  });
+
+  console.log('someoneConnected');
+  ws.send("You are connected");
+});
+
+app.listen(port, function() { console.log('listening') });
