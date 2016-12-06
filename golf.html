@@ -119,24 +119,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body>
   <my-carousel>
-    <img data-src="media/titleist1.jpg">
-    <img data-src="media/titleist2.jpg">
-    <img data-src="media/titleist3.jpg">
-    <img data-src="media/titleist4.jpg">
-    <img data-src="media/titleist5.jpg">
+    <img data-src="media/golf1.png">
+    <img data-src="media/golf2.png">
+    <img data-src="media/golf3.png">
+    <img data-src="media/golf4.png">
   </my-carousel>
 
   <div class="block" id="infos">
-      <div>Titleist Lightweight</div>
+      <div>7-club Moxie i set</div>
       <div><my-rating nb="4"></my-rating></div>
-      <div>130$</div>
+      <div>159$</div>
   </div>
 
   <div class="block" id="listActions">
-    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
-    <my-button class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'comment');"><i class="material-icons">grade</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'promo');"><i class="material-icons">money_off</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
+    <my-button id="firstAction" class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
+    <my-button class="my-button" onclick="stopPlayer();selectElement(this,'stop');"><i class="material-icons">stop</i></my-button>
+    <my-button class="my-button" onclick="callWeb();selectElement(this,'web');"><i class="material-icons">add</i></my-button>
   </div>
   
   <div class="element" id="info">
@@ -149,16 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                     "desc": "2 Years"
                                 }, {
                                     "title": "Compartments",
-                                    "desc": "Six for 14 clubs"
-                                }, {
-                                    "title": "Dividers",
-                                    "desc": "4"
-                                }, {
-                                    "title": "Type of bag",
-                                    "desc": "Portable"
-                                }, {
-                                    "title": "Pockets",
-                                    "desc": "6"
+                                    "desc": "6-way dividers"
                                 }]'></my-informations>
   </div>
 
@@ -170,36 +160,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </video> -->
   </div>
 
-
-  <div class="element" id="comment">
-  <h2>Comments</h2>
-  <my-comments comments='[{
-                                    "title": "Highly Recommended",
-                                    "author" : "By  Max   on April 3, 2016",
-                                    "grade": "5",
-                                    "desc": "This beats all of the competitor bags I looked at prior to purchasing. It is on the more expensive side, about $50 more than I wanted to spend. As soon as I unpacked it I was blown away by how light it is. It does come with a rain cover. Waterproof polar fleece lined pocket for wallet / other goods."
-                                }, {
-                                    "title": "Just as expected",
-                                    "author" : "By  Bryce and Rachel   on August 23, 2016",
-                                    "grade": "5",
-                                    "desc": "This bag is on the expensive side in terms of stand bags. With that being said, with titleist you know exactly the quality you are getting. The straps are as comfortable as straps get and have ample padding. As you spend more on a bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed."
-                                }, {
-                                    "title": "good sturdy bag",
-                                    "author" : "By  Rebecca Oates   on June 23, 2016",
-                                    "grade": "4",
-                                    "desc": "good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had."
-                                }]'></my-comments>
+  <div class="element" id="stop">
+  <h2>Stop</h2>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">...</div>
   </div>
 
-  <div class="element" id="promo">
-  <h2>Promo <div  style="float:right;">-30%</div></h2>
-  <div style="display: flex; align-items: center; justify-content: center; margin-top:5px;">
-    <img src="media/promo.jpg" style="max-width:100%; max-height:150px;"></img>
-  </div>
+  <div class="element" id="web">
+  <h2>Interaction</h2>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">Look at the screen</div>
   </div>
 
   <script>
   window.onload = function() {
+    console.log('onload golf');
       document.getElementById('firstAction').click();
     };
 
@@ -220,6 +193,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     function callPlayer() {
+      console.log('callplayer golf');
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
@@ -231,12 +205,52 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
 
-      xmlhttp.open("POST", "/show/123", true);
+      xmlhttp.open("POST", "/show/123/pub2", true);
+      xmlhttp.send();
+    }
+    function stopPlayer() {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+             if (xmlhttp.status == 200) {
+                 console.log("ok");
+             }
+             else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
+             }
+             else {
+                 alert('something else other than 200 was returned '+xmlhttp.status);
+             }
+          }
+      };
+
+      xmlhttp.open("POST", "/stop/123/pub1", true);
+      xmlhttp.send();
+    }
+    function callWeb() {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+             if (xmlhttp.status == 200) {
+                 console.log("ok");
+             }
+             else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
+             }
+             else {
+                 alert('something else other than 200 was returned '+xmlhttp.status);
+             }
+          }
+      };
+
+      xmlhttp.open("POST", "/web/123/pub3", true);
       xmlhttp.send();
     }
 

@@ -119,24 +119,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body>
   <my-carousel>
-    <img data-src="media/ski1.jpg">
-    <img data-src="media/ski2.jpg">
-    <img data-src="media/ski3.jpg">
-    <img data-src="media/ski4.jpg">
-    <img data-src="media/ski5.jpg">
+    <img data-src="media/ski1.png">
+    <img data-src="media/ski2.png">
+    <img data-src="media/ski3.png">
   </my-carousel>
 
   <div class="block" id="infos">
-      <div>Salomon Skis</div>
-      <div><my-rating nb="5"></my-rating></div>
-      <div>290$</div>
+      <div>Salomon MTN Explore 88</div>
+      <div><my-rating nb="4"></my-rating></div>
+      <div>489$</div>
   </div>
 
   <div class="block" id="listActions">
-    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
-    <my-button class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'comment');"><i class="material-icons">grade</i></my-button>
-    <my-button class="my-button" onclick="selectElement(this,'promo');"><i class="material-icons">money_off</i></my-button>
+    <my-button class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
+    <my-button id="firstAction" class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
+    <my-button class="my-button" onclick="stopPlayer();selectElement(this,'stop');"><i class="material-icons">stop</i></my-button>
+    <my-button class="my-button" onclick="callWeb();selectElement(this,'web');"><i class="material-icons">add</i></my-button>
   </div>
   
   <div class="element" id="info">
@@ -168,31 +166,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </div>
 
 
-  <div class="element" id="comment">
-  <h2>Comments</h2>
-  <my-comments comments='[{
-                                    "title": "Love them",
-                                    "author" : "By  Kathy M. Honea   on April 26, 2016",
-                                    "grade": "5",
-                                    "desc": "Great all around skis! "
-                                }, {
-                                    "title": "BEST SKIS YOU CAN BUY!",
-                                    "author" : "By  Derek   on March 4, 2016",
-                                    "grade": "5",
-                                    "desc": "These skis are one of the best skis I ve ever had in my life time. I was skiing in a pair of volki all mountain skis then I switched to these one and now I m never going back. These skis are great for my second pair of skis I ve owned and I recommend getting the Salomon Sth2 WTR 13 Bindings at 100mm or 115mm bindings or Warden MNC 13. BUY THESE SKIS!"
-                                }, {
-                                    "title": "4 Stars",
-                                    "author" : "By  Bryce    on November 6, 2015",
-                                    "grade": "4",
-                                    "desc": "Great skis"
-                                }]' ></my-comments>
+  <div class="element" id="stop">
+  <h2>Stop</h2>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">...</div>
   </div>
 
-  <div class="element" id="promo">
-  <h2>Promo <div  style="float:right;">-30%</div></h2>
-  <div style="display: flex; align-items: center; justify-content: center; margin-top:5px;">
-    <img src="media/promo.jpg" style="max-width:100%; max-height:150px;"></img>
-  </div>
+  <div class="element" id="web">
+  <h2>Interaction</h2>
+  <div style="margin:15px; font-size:25px; text-align:center; display:block;">Look at the screen</div>
   </div>
 
   <script>
@@ -233,7 +214,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
       };
 
-      xmlhttp.open("POST", "/show/123", true);
+      xmlhttp.open("POST", "/show/123/pub4", true);
+      xmlhttp.send();
+    }
+    function stopPlayer() {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+             if (xmlhttp.status == 200) {
+                 console.log("ok");
+             }
+             else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
+             }
+             else {
+                 alert('something else other than 200 was returned');
+             }
+          }
+      };
+
+      xmlhttp.open("POST", "/stop/123/pub1", true);
+      xmlhttp.send();
+    }
+    function callWeb() {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+             if (xmlhttp.status == 200) {
+                 console.log("ok");
+             }
+             else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
+             }
+             else {
+                 alert('something else other than 200 was returned');
+             }
+          }
+      };
+
+      xmlhttp.open("POST", "/web/123/pub5", true);
       xmlhttp.send();
     }
 

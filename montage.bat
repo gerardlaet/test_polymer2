@@ -1,0 +1,1 @@
+net use P: \\10.3.200.53\Piksel_DS @Ks-player-player2012! /USER:exploit
