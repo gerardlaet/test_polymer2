@@ -143,7 +143,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <my-button class="my-button" onclick="selectElement(this,'info');" ><i class="material-icons">info_outline</i></my-button>
     <my-button id="firstAction" class="my-button" onclick="callPlayer(); selectElement(this,'medias');"><i class="material-icons">play_arrow</i></my-button>
     <my-button class="my-button" onclick="stopPlayer();selectElement(this,'stop');"><i class="material-icons">stop</i></my-button>
-    <my-button class="my-button" onclick="callWeb();selectElement(this,'web');"><i class="material-icons">add</i></my-button>
+    <my-button class="my-button" onclick="callWeb();selectElement(this,'interaction');"><i class="material-icons">add</i></my-button>
   </div>
 
   <div class="element" id="info">
@@ -179,6 +179,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <h2>Stop</h2>
   <div style="margin:15px; font-size:25px; text-align:center; display:block;">...</div>
   </div>
+
+<div class="element" id="interaction" style="padding-bottom:10px;">
+    <h2>Interactivity</h2>
+    <my-interactivity ></my-interactivity>
+    </div>
+
 
   <div class="element" id="web">
   <h2>Interaction</h2>
