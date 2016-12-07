@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="my-interactivity.html">
 
   <script>
-  window.socket = new WebSocket("ws://localhost:3000");
+  window.socket = new WebSocket("ws://10.3.4.102:3000");
   socket.onopen = function (event) {
     socket.send("Im here");
   };
@@ -41,6 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     body {
       background: #eee;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
     my-carousel {
       width: 100%;
@@ -120,6 +121,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .hidden {
       display: none;
     }
+    button,
+button:active,
+button:focus, 
+button:hover {
+outline:none !important;
+}
 
 </style>
 

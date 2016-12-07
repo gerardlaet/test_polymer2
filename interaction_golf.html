@@ -18,14 +18,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>my-carousel demo</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <!-- <link rel="import" href="//polygit.org/polymer+polymer+:2.0-preview/components/polymer/polymer.html"> -->
-    <link rel="import" href="bower_components/polymer/polymer.html">
-
-    <link rel="import" href="my-informations.html">
-    <link rel="import" href="my-button.html">
+    
     <script>
-        window.socket = new WebSocket("ws://localhost:3000");
+        window.socket = new WebSocket("ws://10.3.4.102:3000");
         socket.onopen = function(event) {
             socket.send("interaction_golf");
         };
@@ -36,12 +31,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 switch (received_msg) {
                     case "north":
-                        console.log('go north');
-                        ;
-                        console.log(document.getElementsByClassName("active").nextSibling);
+                        img_selected.removeAttribute('selected');
+                        img_selected.setAttribute('hidden', "hidden");
+                        var test=img_selected.previousElementSibling;
+                        if (!test) {
+                            var carr=document.getElementById('carroussel');
+                            window.img_selected=carr.lastElementChild;
+                        }
+                        else {
+                           window.img_selected=test; 
+                        }                        
+                        img_selected.removeAttribute('hidden');
+                        img_selected.setAttribute('selected', "");
                         break;
                     case "south":
-
+                        img_selected.removeAttribute('selected');
+                        img_selected.setAttribute('hidden', "hidden");
+                        var test=img_selected.nextElementSibling;
+                        if (!test) {
+                            var carr=document.getElementById('carroussel');
+                            window.img_selected=carr.firstElementChild;
+                        }
+                        else {
+                           window.img_selected=test; 
+                        }                        
+                        img_selected.removeAttribute('hidden');
+                        img_selected.setAttribute('selected', "");
                         break;
                     case "east":
                         var elements=document.getElementsByClassName("active");
@@ -85,21 +100,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
         html {
             font-family: 'Roboto', sans-serif;
+            margin:0;
+            padding:0;
+            overflow:hidden;
         }
 
         body {
             background: #eee;
+             margin:0;
+            padding:0;
+             overflow:hidden;
         }
 
         .global {
-            width: 926px;
+            width: 920px;
             max-height: 530px;
         }
 
         #medias {
-            width: 100%;
             contain: content;
-            height: 350px;
+            height: 400px;
         }
 
         #medias::after {
@@ -110,7 +130,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         #medias img {
-            position: absolute;
+            /*position: absolute;*/
+            max-width:100%;
             max-height: 350px;
             /*width: 100%;
       height: 100%;*/
@@ -133,6 +154,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             display: block;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
             background: #FFF;
+            height:400px;
         }
 
         .element h2 {
@@ -280,6 +302,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background: #ff000a;
       color:#FFF;
     }
+
+    .carroussel {
+        display:flex;
+        justify-content:center;
+        align-items: center;
+    }
     </style>
 </head>
 
@@ -315,10 +343,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <div class="element" id="medias" style="padding-bottom:10px;">
             <h2>Medias</h2>
-            <img src="media/golf1.png" hidden>
+            <div class="carroussel" id="carroussel">
+            <img src="media/golf1.png" >
             <img src="media/golf2.png" hidden>
             <img src="media/golf3.png" hidden>
             <img src="media/golf4.png" hidden>
+            </div>
         </div>
 
         <div class="element" id="comment">
@@ -355,19 +385,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         bag, one thing that always tends to get better are the zippers. I don t know about you, but I love high quality zippers that I know I m not going to have trouble with in the future. Some of golf is about looks. I play at some expensive
                         and very nice courses from time to time and I feel confident when I strap this bag to the back of my cart. Fits right in! If you are contemplating getting this bag for you or a loved one, you won t be disappointed.</div>
                 </div>
-                <div class="elemComment">
-                    <div class="head">
-                        <div class="com_title">good sturdy bag</div>
-                        <div class="com_grade">
-                            <i class="material-icons active">grade</i>
-                            <i class="material-icons active">grade</i>
-                            <i class="material-icons active">grade</i>
-                            <i class="material-icons active">grade</i>
-                        </div>
-                    </div>
-                    <div class="com_author">By Rebecca Oates on June 23, 2016</div>
-                    <div class="com_desc">good sturdy bag..I walk a lot and carry my clubs and this bag has been the most comfortable that I have had.</div>
-                </div>
 
             </div>
         </div>
@@ -376,6 +393,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
         window.onload = function() {
             document.getElementById('firstAction').click();
+            var carr=document.getElementById('carroussel');
+            window.img_selected=carr.firstElementChild;
+            img_selected.setAttribute('selected', "");
         };
 
         function selectElement(e, target) {
@@ -398,7 +418,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-        const carousel = document.querySelector('my-carousel');
+        //const carousel = document.querySelector('my-carousel');
         //setInterval(_ => carousel.next(), 3000);
         //window.carrousselPlay = setInterval(_ => carousel.next(), 3000);
     </script>
