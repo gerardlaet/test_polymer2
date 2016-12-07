@@ -44,10 +44,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                         break;
                     case "east":
-
+                        var elements=document.getElementsByClassName("active");
+                        //for (var i = 0; i < elements.length; i++) {
+                                var id=elements[0].id;
+                                console.log('active element is '+id);
+                                if (id=="firstAction") {
+                                    document.getElementById('2Action').click();
+                                }
+                                else if (id=="2Action") {
+                                    console.log('active element is '+id);
+                                    document.getElementById('3Action').click();
+                                }
+                                else {
+                                    document.getElementById('firstAction').click();
+                                }
+                        //}
                         break;
                     case "west":
-
+                        var elements=document.getElementsByClassName("active");
+                        //for (var i = 0; i < elements.length; i++) {
+                                var id=elements[0].id;
+                                console.log('active element is '+id);
+                                if (id=="firstAction") {
+                                    document.getElementById('3Action').click();
+                                }
+                                else if (id=="2Action") {
+                                    document.getElementById('firstAction').click();
+                                }
+                                else {
+                                    document.getElementById('2Action').click();
+                                }
+                        //}
                         break;
                     default:
                 }
@@ -260,8 +287,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="global">
         <div class="block" id="listActions">
           <button id="firstAction" class="my-button" onclick="selectElement(this,'info');"><slot></slot>Details</button>
-          <button class="my-button" onclick="selectElement(this,'medias');"><slot></slot>Media</button>
-          <button class="my-button" onclick="selectElement(this,'comment');"><slot></slot>Reviews</button>
+          <button id="2Action" class="my-button" onclick="selectElement(this,'medias');"><slot></slot>Media</button>
+          <button id="3Action" class="my-button" onclick="selectElement(this,'comment');"><slot></slot>Reviews</button>
         </div>
 
         <div class="element" id="info">
