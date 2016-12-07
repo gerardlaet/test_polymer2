@@ -14,7 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-  <title>Salomon MTN Explore 88</title>
+  <title>GoPro Hero5 Black</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -121,28 +121,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .hidden {
       display: none;
     }
-    button,
+button,
 button:active,
 button:focus, 
 button:hover {
 outline:none !important;
 }
-
 </style>
 
 </head>
 
 <body>
   <my-carousel>
-    <img data-src="media/ski1.png">
-    <img data-src="media/ski2.png">
-    <img data-src="media/ski3.png">
+    <img data-src="media/camera1.png">
+    <img data-src="media/camera2.png">
+    <img data-src="media/camera3.png">
+    <img data-src="media/camera4.png">
   </my-carousel>
 
   <div class="block" id="infos">
-      <div>Salomon MTN Explore 88</div>
-      <div><my-rating nb="4"></my-rating></div>
-      <div>489$</div>
+      <div>GoPro Hero5 Black</div>
+      <div><my-rating nb="3"></my-rating></div>
+      <div>429$</div>
   </div>
 
   <div class="block" id="listActions">
@@ -155,22 +155,25 @@ outline:none !important;
   <div class="element" id="info">
     <h2>Informations</h2>
     <my-informations informations='[{
-                                    "title": "Product Dimensions",
-                                    "desc": "156 x 163 x 170 cm"
+                                    "title": "Image quality",
+                                    "desc": "12 million pixels"
+                                },{
+                                    "title": "Video quality",
+                                    "desc": "FULL HD 1080p up to 60 frames per second"
+                                }, {
+                                    "title": "Autonomy",
+                                    "desc": "Up to 4h30"
+                                }, {
+                                    "title": "Waterproof",
+                                    "desc": "Up to 60 metres"
                                 }, {
                                     "title": "Guarantee",
                                     "desc": "2 Years"
-                                }, {
-                                    "title": "Sidecut",
-                                    "desc": "126/80/109, 13.6 m in 170 cm"
-                                }, {
-                                    "title": "Programme",
-                                    "desc": "70% On-piste"
-                                }, {
-                                    "title": "Construction",
-                                    "desc": "2 layers of titanal"
                                 }]'></my-informations>
   </div>
+
+
+    
 
   <div class="element" id="medias" style="padding-bottom:10px;">
   <h2>Medias</h2>
@@ -180,17 +183,16 @@ outline:none !important;
   </video> -->
   </div>
 
-
-    <div class="element" id="interaction" style="padding-bottom:10px;">
-    <h2>Interactivity</h2>
-    <my-interactivity ></my-interactivity>
-    </div>
-
-
   <div class="element" id="stop">
   <h2>Stop</h2>
   <div style="margin:15px; font-size:25px; text-align:center; display:block;">...</div>
   </div>
+
+<div class="element" id="interaction" style="padding-bottom:10px;">
+    <h2>Interactivity</h2>
+    <my-interactivity ></my-interactivity>
+    </div>
+
 
   <div class="element" id="web">
   <h2>Interaction</h2>
@@ -199,6 +201,7 @@ outline:none !important;
 
   <script>
   window.onload = function() {
+    console.log('onload camera');
       document.getElementById('firstAction').click();
     };
 
@@ -219,6 +222,7 @@ outline:none !important;
     }
 
     function callPlayer() {
+      console.log('callplayer camera');
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
@@ -230,12 +234,12 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
 
-      xmlhttp.open("POST", "/show/123/pub4", true);
+      xmlhttp.open("POST", "/show/123/pub8", true);
       xmlhttp.send();
     }
     function stopPlayer() {
@@ -250,7 +254,7 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
@@ -270,12 +274,12 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
 
-      xmlhttp.open("POST", "/web/123/pub5", true);
+      xmlhttp.open("POST", "/web/123/pub9", true);
       xmlhttp.send();
     }
 

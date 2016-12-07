@@ -14,7 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-  <title>Salomon MTN Explore 88</title>
+  <title>GT TEAM XTR trail bike</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -121,28 +121,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .hidden {
       display: none;
     }
-    button,
+button,
 button:active,
 button:focus, 
 button:hover {
 outline:none !important;
 }
-
 </style>
 
 </head>
 
 <body>
   <my-carousel>
-    <img data-src="media/ski1.png">
-    <img data-src="media/ski2.png">
-    <img data-src="media/ski3.png">
+    <img data-src="media/vtt1.png">
+    <img data-src="media/vtt2.png">
+    <img data-src="media/vtt3.png">
+    <img data-src="media/vtt4.png">
   </my-carousel>
 
   <div class="block" id="infos">
-      <div>Salomon MTN Explore 88</div>
+      <div>GT TEAM XTR trail bike</div>
       <div><my-rating nb="4"></my-rating></div>
-      <div>489$</div>
+      <div>5499$</div>
   </div>
 
   <div class="block" id="listActions">
@@ -155,22 +155,22 @@ outline:none !important;
   <div class="element" id="info">
     <h2>Informations</h2>
     <my-informations informations='[{
-                                    "title": "Product Dimensions",
-                                    "desc": "156 x 163 x 170 cm"
+                                    "title": "Wheel size",
+                                    "desc": "27.5 inches"
+                                }, {
+                                    "title": "Composition",
+                                    "desc": "100.0% Aluminium 6061"
+                                }, {
+                                    "title": "Weight",
+                                    "desc": "12.7 kg in size M"
                                 }, {
                                     "title": "Guarantee",
                                     "desc": "2 Years"
-                                }, {
-                                    "title": "Sidecut",
-                                    "desc": "126/80/109, 13.6 m in 170 cm"
-                                }, {
-                                    "title": "Programme",
-                                    "desc": "70% On-piste"
-                                }, {
-                                    "title": "Construction",
-                                    "desc": "2 layers of titanal"
                                 }]'></my-informations>
   </div>
+
+
+    
 
   <div class="element" id="medias" style="padding-bottom:10px;">
   <h2>Medias</h2>
@@ -180,17 +180,16 @@ outline:none !important;
   </video> -->
   </div>
 
-
-    <div class="element" id="interaction" style="padding-bottom:10px;">
-    <h2>Interactivity</h2>
-    <my-interactivity ></my-interactivity>
-    </div>
-
-
   <div class="element" id="stop">
   <h2>Stop</h2>
   <div style="margin:15px; font-size:25px; text-align:center; display:block;">...</div>
   </div>
+
+<div class="element" id="interaction" style="padding-bottom:10px;">
+    <h2>Interactivity</h2>
+    <my-interactivity ></my-interactivity>
+    </div>
+
 
   <div class="element" id="web">
   <h2>Interaction</h2>
@@ -199,6 +198,7 @@ outline:none !important;
 
   <script>
   window.onload = function() {
+    console.log('onload vtt');
       document.getElementById('firstAction').click();
     };
 
@@ -219,6 +219,7 @@ outline:none !important;
     }
 
     function callPlayer() {
+      console.log('callplayer vtt');
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
@@ -230,12 +231,12 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
 
-      xmlhttp.open("POST", "/show/123/pub4", true);
+      xmlhttp.open("POST", "/show/123/pub6", true);
       xmlhttp.send();
     }
     function stopPlayer() {
@@ -250,7 +251,7 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
@@ -270,12 +271,12 @@ outline:none !important;
                 alert('There was an error 400');
              }
              else {
-                 alert('something else other than 200 was returned');
+                 alert('something else other than 200 was returned '+xmlhttp.status);
              }
           }
       };
 
-      xmlhttp.open("POST", "/web/123/pub5", true);
+      xmlhttp.open("POST", "/web/123/pub7", true);
       xmlhttp.send();
     }
 
