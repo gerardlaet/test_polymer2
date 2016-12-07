@@ -23,7 +23,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="my-informations.html">
   <link rel="import" href="my-button.html">
+  <script>
+        window.socket = new WebSocket("ws://localhost:3000");
+        socket.onopen = function(event) {
+            socket.send("interaction_golf");
+        };
+        socket.onmessage = function(evt) {
+            var received_msg = evt.data;
+            console.log("Message is received", received_msg);
+            if (received_msg) {
 
+                switch (received_msg) {
+                    case "north":
+                        console.log('go north');
+                        ;
+                        console.log(document.getElementsByClassName("active").nextSibling);
+                        break;
+                    case "south":
+
+                        break;
+                    case "east":
+
+                        break;
+                    case "west":
+
+                        break;
+                    default:
+                }
+
+            }
+        };
+  </script>
   <style>
    html {
       font-family: 'Roboto', sans-serif;
@@ -193,6 +223,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       display: flex;
     }
  
+        .my-button {
+          width:100%;
+        }
+        button {
+      width:100%;
+      background: #FFF;
+      height:75px;
+      width: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 45px;
+      text-align: center;
+      z-index: 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border:none;
+
+    }
+
+    button:hover, button.active{
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      z-index: 10;
+      background: #ff000a;
+      color:#FFF;
+    }
 
 </style>
 </head>
@@ -200,9 +256,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body>
   <div class="global">
   <div class="block" id="listActions">
-    <my-button id="firstAction" class="my-button" onclick="selectElement(this,'info');" >Details</my-button>
-    <my-button class="my-button" onclick="selectElement(this,'medias');">Media</my-button>
-    <my-button class="my-button" onclick="selectElement(this,'comment');">Reviews</my-button>
+    <button id="firstAction" class="my-button" onclick="selectElement(this,'info');"><slot></slot>Details</button>
+    <button class="my-button" onclick="selectElement(this,'medias');"><slot></slot>Media</button>
+    <button class="my-button" onclick="selectElement(this,'comment');"><slot></slot>Reviews</button>
   </div>
   
   <div class="element" id="info">
